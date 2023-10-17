@@ -13,6 +13,7 @@ afterAll(() => server.close());
 describe("Fetching pets", () => {
   it("should fetch all pets by default", async () => {
     render(<App />);
+    await screen.findAllByTestId("pet");
 
     fireEvent.click(screen.getByText(/Find pets/));
 
@@ -40,6 +41,7 @@ describe("Fetching pets", () => {
 describe("Adopting pets", () => {
   it("should set a pet's adopted status to true", async () => {
     render(<App />);
+    await screen.findAllByTestId("pet");
 
     fireEvent.click(screen.getByText(/Find pets/));
 
@@ -47,7 +49,7 @@ describe("Adopting pets", () => {
     const button = buttons[0];
 
     fireEvent.click(button);
-
+    await screen.findAllByTestId("pet");
     expect(button.textContent).toContain("Already adopted");
   });
 });
